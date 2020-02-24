@@ -1,6 +1,6 @@
 import os
-import cv2
 import time
+import cv2
 
 def preview_image(image, name="window", time=100, resize=True):
     if resize:

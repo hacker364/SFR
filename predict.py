@@ -1,11 +1,12 @@
-import math
-from sklearn import neighbors
 import os
 import os.path
 import pickle
-from PIL import Image, ImageDraw
+import math
 import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
+from PIL import Image, ImageDraw
+from sklearn import neighbors
+
 
 def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.5):
     """
