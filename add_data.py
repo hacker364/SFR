@@ -1,6 +1,8 @@
 import os
 import time
 import cv2
+from openpyxl import Workbook
+from openpyxl import load_workbook
 
 def preview_image(image, name="window", time=100, resize=True):
     if resize:
@@ -30,5 +32,22 @@ def take_image(name):
         preview_image(image)
 
 if __name__ == "__main__":
+    data = []
+    os.chdir('/home/henil/Projects/hackathon')
+    wb = load_workbook(filename = 'base.xlsx')
+    sheet = wb.active
+    row = len(sheet['A']) + 1
+    
     name = input("Enter the name of student: ")
+    ID = input("Enter the ID of student: ")
+    data.append(name)
+    data.append(ID)
+
+    for rows in data:
+        sheet.cell(row=row, column=1, value=name)
+        sheet.cell(row=row, column=2, value=ID)
+        sheet.cell(row=row, column=3, value=0)
+        sheet.cell(row=row, column=4, value=0)
+    
+    wb.save(filename = 'base.xlsx')
     take_image(name)

@@ -6,6 +6,10 @@ import face_recognition
 from face_recognition.face_recognition_cli import image_files_in_folder
 from PIL import Image, ImageDraw
 from sklearn import neighbors
+from openpyxl import Workbook
+from openpyxl import load_workbook
+import datetime
+
 
 
 def predict(X_img_path, knn_clf=None, model_path=None, distance_threshold=0.5):
@@ -78,7 +82,11 @@ def show_prediction_labels_on_image(img_path, predictions):
     pil_image.show()
 
 if __name__ == "__main__":
+    data = []
     os.chdir("/home/henil/Projects/hackathon/SFR")
+    wb = load_workbook(filename = '../base.xlsx')
+    sheet = wb.active
+    row = len(sheet['A']) + 1
     # STEP 2: Using the trained classifier, make predictions for unknown images
     for image_file in os.listdir("./testData"):
         full_file_path = os.path.join("./testData", image_file)
@@ -92,6 +100,12 @@ if __name__ == "__main__":
         # Print results on the console
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
+            data.append(name)
+            
 
+        wb.save(filename = 'base.xlsx')
         # Display results overlaid on an image
         #show_prediction_labels_on_image(os.path.join("./testData", image_file), predictions)
+
+
+

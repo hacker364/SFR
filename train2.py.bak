@@ -7,15 +7,15 @@ names = []
 
 #Directory with Training Data
 os.chdir('/home/henil/Projects/hackathon/SFR')
-train_dir = os.listdir('StudentDetails')
+train_dir = os.listdir('trainData')
 base = "/home/henil/Projects/hackathon/SFR/"
 #Looping through each folder in train_dir
 for person in train_dir:
-    pid = os.listdir(base + "StudentDetails/" + person)
+    pid = os.listdir(base + "trainData/" + person)
 
     for person_img in pid:
         #Looping through each photo of a person for training
-        face = face_recognition.load_image_file(base + "/StudentDetails/" + person + "/" + person_img)
+        face = face_recognition.load_image_file(base + "/trainData/" + person + "/" + person_img)
         face_bounding_box = face_recognition.face_locations(face)
 
         #Training Data must contain exactly one face per photo
