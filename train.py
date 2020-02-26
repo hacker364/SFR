@@ -73,6 +73,6 @@ if __name__ == "__main__":
     # STEP 1: Train the KNN classifier and save it to disk
     # Once the model is trained and saved, you can skip this step next time.
     print("Training KNN classifier...")
-    os.chdir("/home/henil/Projects/hackathon/SFR")
+    os.chdir("/home/pi/SFR")
     classifier = train("./trainData", model_save_path="trained_knn_model.clf", n_neighbors=1, verbose=True)
     print("Training complete!")

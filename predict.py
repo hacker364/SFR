@@ -83,8 +83,8 @@ def show_prediction_labels_on_image(img_path, predictions):
 
 if __name__ == "__main__":
     data = []
-    os.chdir("/home/henil/Projects/hackathon/SFR")
-    wb = load_workbook(filename = '../base.xlsx')
+    os.chdir("/home/pi/SFR")
+    wb = load_workbook(filename = 'base.xlsx')
     sheet = wb.active
     row = len(sheet['A']) + 1
     # STEP 2: Using the trained classifier, make predictions for unknown images
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
         # Find all people in the image using a trained classifier model
         # Note: You can pass in either a classifier file name or a classifier model instance
-        predictions = predict(full_file_path, model_path="trained_knn_model.clf", distance_threshold=0.55)
+        predictions = predict(full_file_path, model_path="trained_knn_model.clf", distance_threshold=0.5)
 
         # Print results on the console
         for name, (top, right, bottom, left) in predictions:

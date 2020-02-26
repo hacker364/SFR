@@ -12,7 +12,7 @@ def preview_image(image, name="window", time=100, resize=True):
     cv2.waitKey(time)
 
 def take_image(name):
-    os.chdir("/home/henil/Projects/hackathon/SFR/trainData")
+    os.chdir("/home/pi/SFR/trainData")
     if os.path.exists(name):
         print("Person with same Name exists")
         exit
@@ -21,7 +21,7 @@ def take_image(name):
     
     video_capture = cv2.VideoCapture(0)
     success, image = video_capture.read()
-    count = 60
+    count = 30 
         
     while success:
         success, image = video_capture.read() 
@@ -33,7 +33,7 @@ def take_image(name):
 
 if __name__ == "__main__":
     data = []
-    os.chdir('/home/henil/Projects/hackathon')
+    os.chdir('/home/pi/SFR')
     wb = load_workbook(filename = 'base.xlsx')
     sheet = wb.active
     row = len(sheet['A']) + 1

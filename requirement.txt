@@ -1,6 +1,5 @@
 astroid==2.3.3
 Click==7.0
-cv==1.0.0
 dlib==19.19.0
 et-xmlfile==1.0.1
 face-recognition==1.2.3
@@ -11,7 +10,6 @@ joblib==0.14.1
 lazy-object-proxy==1.4.3
 mccabe==0.6.1
 numpy==1.18.1
-opencv-python==4.1.2.30
 openpyxl==3.0.3
 Pillow==7.0.0
 pylint==2.4.4
