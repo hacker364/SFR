@@ -86,7 +86,7 @@ if __name__ == "__main__":
     os.chdir("/home/pi/SFR")
     wb = load_workbook(filename = 'base.xlsx')
     sheet = wb.active
-    row = len(sheet['A']) + 1
+    max_rows = len(sheet['A']) + 1
     # STEP 2: Using the trained classifier, make predictions for unknown images
     for image_file in os.listdir("./testData"):
         full_file_path = os.path.join("./testData", image_file)
@@ -95,15 +95,25 @@ if __name__ == "__main__":
 
         # Find all people in the image using a trained classifier model
         # Note: You can pass in either a classifier file name or a classifier model instance
-        predictions = predict(full_file_path, model_path="trained_knn_model.clf", distance_threshold=0.5)
+        predictions = predict(full_file_path, model_path="trained_knn_model.clf", distance_threshold=0.50)
 
         # Print results on the console
         for name, (top, right, bottom, left) in predictions:
             print("- Found {} at ({}, {})".format(name, left, top))
-            data.append(name)
-            
+            if name not in data:
+                data.append(name)
 
-        wb.save(filename = 'base.xlsx')
+    for cells in range(2, max_rows):
+        name = sheet["A" + str(cells)].value
+        if name == None:
+            break
+        elif name in data:
+            sheet["C" + str(cells)].value += 1
+            sheet["D" + str(cells)].value += 1
+        else:
+            sheet["D" + str(cells)].value += 1            
+
+    wb.save(filename = 'base.xlsx')
         # Display results overlaid on an image
         #show_prediction_labels_on_image(os.path.join("./testData", image_file), predictions)
 

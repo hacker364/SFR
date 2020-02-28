@@ -36,7 +36,12 @@ if __name__ == "__main__":
     os.chdir('/home/pi/SFR')
     wb = load_workbook(filename = 'base.xlsx')
     sheet = wb.active
-    row = len(sheet['A']) + 1
+    max_rows = len(sheet['A']) + 1
+    for cells in range(2, max_rows):
+        name = sheet["A" + str(cells)].value
+        if(name == None):
+            max_rows = cells
+            break
     
     name = input("Enter the name of student: ")
     ID = input("Enter the ID of student: ")
@@ -44,10 +49,10 @@ if __name__ == "__main__":
     data.append(ID)
 
     for rows in data:
-        sheet.cell(row=row, column=1, value=name)
-        sheet.cell(row=row, column=2, value=ID)
-        sheet.cell(row=row, column=3, value=0)
-        sheet.cell(row=row, column=4, value=0)
+        sheet.cell(row=max_rows, column=1, value=name)
+        sheet.cell(row=max_rows, column=2, value=ID)
+        sheet.cell(row=max_rows, column=3, value=0)
+        sheet.cell(row=max_rows, column=4, value=0)
     
     wb.save(filename = 'base.xlsx')
     take_image(name)
